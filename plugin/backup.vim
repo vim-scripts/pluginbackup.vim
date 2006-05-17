@@ -3,8 +3,8 @@
 "   Maintainer: Martin Krischik
 "    Copyright: Copyright (C) 2006 Martin Krischik
 " Name Of File: plugin/backup.vim
-" Last Changed: Monday, 10 May 2006
-"      Version: 1.0
+" Last Changed: Monday, 15 May 2006
+"      Version: 1.1
 "	   URL: http://www.vim.org/account/profile.php?user=7818
 "	 Usage: copy to plugin directory.
 "
@@ -17,6 +17,9 @@
 "  g:backup_purge	count of backups to hold - purge older once.
 "			On VMS PURGE is used to delete older version
 "			0 switched the feature of
+"
+"      History: 15.05.2006 MK Fix "Press ENTER ..." on vms systems
+"               15.05.2006 MK Fix set backupdir on non vms systems
 "-------------------------------------------------------------------------------
 
 if exists("s:loaded_backup")
@@ -37,7 +40,7 @@ else
 
 	function! s:Do_Purge (Doc_Path)
 	    if g:backup_purge > 0
-		execute "!PURGE /NoLog /Keep=" . g:backup_purge . " " . a:Doc_Path
+		execute ":silent :!PURGE /NoLog /Keep=" . g:backup_purge . " " . a:Doc_Path
 	    endif
 	endfunction Do_Purge
 
@@ -50,8 +53,9 @@ else
 	set writebackup
 	set backup
 	set backupext=;1
-	set backupdir^=~/.backups  
-	set backupdir^=./.backups
+
+	execute "set backupdir^=~/" . g:backup_directory
+	execute "set backupdir^=./" . g:backup_directory
 
 	if  exists("*mkdir")
 
