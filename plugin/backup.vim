@@ -1,13 +1,19 @@
 "-------------------------------------------------------------------------------
 "  Description: Use VMS style versioned backup 
-"   Maintainer: Martin Krischik
+"         $Id: backup.vim 214 2006-05-25 09:24:57Z krischik $
 "    Copyright: Copyright (C) 2006 Martin Krischik
-" Name Of File: plugin/backup.vim
-" Last Changed: Monday, 15 May 2006
-"      Version: 1.1
-"	   URL: http://www.vim.org/account/profile.php?user=7818
+"   Maintainer: Martin Krischik
+"      $Author: krischik $
+"        $Date: 2006-05-25 11:24:57 +0200 (Do, 25 Mai 2006) $
+"      Version: 2.0
+"    $Revision: 214 $
+"     $HeadURL: https://svn.sourceforge.net/svnroot/gnuada/trunk/tools/vim/plugin/backup.vim $
+"      History: 15.05.2006 MK Fix "Press ENTER ..." on vms systems
+"               15.05.2006 MK Fix set backupdir on non vms systems
+"		24.05.2006 MK Unified Headers
 "	 Usage: copy to plugin directory.
-"
+"-------------------------------------------------------------------------------
+" Customize:
 "  g:backup_directory	name of backup directory local to edited file
 "			used for non VMS only. Since non VMS operating-
 "			systems don't know about version we would get
@@ -17,12 +23,9 @@
 "  g:backup_purge	count of backups to hold - purge older once.
 "			On VMS PURGE is used to delete older version
 "			0 switched the feature of
-"
-"      History: 15.05.2006 MK Fix "Press ENTER ..." on vms systems
-"               15.05.2006 MK Fix set backupdir on non vms systems
 "-------------------------------------------------------------------------------
 
-if exists("s:loaded_backup")
+if exists("s:loaded_backup") || version < 700
     finish
 else
     let s:loaded_backup = 1
@@ -111,6 +114,22 @@ else
     finish
 endif
 
+"------------------------------------------------------------------------------
+"   Copyright (C) 2006  Martin Krischik
+"
+"   This program is free software; you can redistribute it and/or
+"   modify it under the terms of the GNU General Public License
+"   as published by the Free Software Foundation; either version 2
+"   of the License, or (at your option) any later version.
+"   
+"   This program is distributed in the hope that it will be useful,
+"   but WITHOUT ANY WARRANTY; without even the implied warranty of
+"   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+"   GNU General Public License for more details.
+"   
+"   You should have received a copy of the GNU General Public License
+"   along with this program; if not, write to the Free Software
+"   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 "-------------------------------------------------------------------------------
 " vim: textwidth=0 nowrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab
 " vim: filetype=vim encoding=latin1 fileformat=unix
