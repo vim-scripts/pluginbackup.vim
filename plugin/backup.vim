@@ -1,17 +1,18 @@
 "-------------------------------------------------------------------------------
 "  Description: Use VMS style versioned backup
-"         $Id: backup.vim 458 2006-11-18 09:42:10Z krischik $
+"          $Id: backup.vim 745 2007-07-08 15:57:40Z krischik $
 "    Copyright: Copyright (C) 2006 Martin Krischik
 "   Maintainer: Martin Krischik
 "      $Author: krischik $
-"        $Date: 2006-11-18 10:42:10 +0100 (Sa, 18 Nov 2006) $
-"      Version: 2.1
-"    $Revision: 458 $
-"     $HeadURL: https://svn.sourceforge.net/svnroot/gnuada/trunk/tools/vim/plugin/backup.vim $
+"        $Date: 2007-07-08 17:57:40 +0200 (So, 08 Jul 2007) $
+"      Version: 2.2
+"    $Revision: 745 $
+"     $HeadURL: http://gnuada.svn.sourceforge.net/svnroot/gnuada/trunk/tools/vim/plugin/backup.vim $
 "      History: 15.05.2006 MK Fix "Press ENTER ..." on vms systems
 "               15.05.2006 MK Fix set backupdir on non vms systems
 "		24.05.2006 MK Unified Headers
 "               15.10.2006 MK Bram's suggestion for runtime integration
+"               15.10.2006 MK Fix pathname with space problem
 "	 Usage: copy to plugin directory.
 "-------------------------------------------------------------------------------
 " Customize:
@@ -29,7 +30,7 @@
 if exists("s:loaded_backup") || version < 700
     finish
 else
-    let s:loaded_backup = 1
+    let s:loaded_backup = 22
 
     if ! exists("g:backup_purge")
 	let g:backup_purge=10
@@ -67,12 +68,21 @@ else
 
 	execute "set backupdir^=~/" . g:backup_directory
 	execute "set backupdir^=./" . g:backup_directory
+	execute "set directory^=./" . g:backup_directory
 
-	" Subsection:  s:Make_Backup_Dir {{{2
+	" Subsection: s:Make_Backup_Dir {{{2
 	"
          function s:Make_Backup_Dir (Path)
 	    if strlen (finddir (a:Path)) == 0
-	    call mkdir (a:Path, "p", 0770)
+	       call mkdir (a:Path, "p", 0770)
+		  if has ("os2")       ||
+		   \ has ("win16")     ||
+		   \ has ("win32")     ||
+		   \ has ("win64")     ||
+		   \ has ("dos16")     ||
+		   \ has ("dos32")
+		     execute '!attrib +h "' . a:Path . '"'
+		  endif
 	    endif
          endfunction Make_Backup_Dir
 
