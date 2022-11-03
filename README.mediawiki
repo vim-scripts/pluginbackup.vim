@@ -17,12 +17,10 @@ Tested with Linux, MS-Windows and OpenVMS.
 
 Install from https://github.com/krischik/vim-backup using dein (https://github.com/Shougo/dein.vim) or similar:
 
-{{code|lang=vim|
-call dein#begin('$HOME/vimfiles/bundles')
-call dein#add('krischik/vim-backup')
-call dein#end()
-call dein#install()
-}}
+    call dein#begin('$HOME/vimfiles/bundles')
+    call dein#add('krischik/vim-backup')
+    call dein#end()
+    call dein#install()
 
 set the following global variables:
 
