@@ -1,0 +1,55 @@
+= Numbered Backups =
+
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1537
+
+== Description ==
+
+Holds numbered backups inside a separate directory.
+
+Automatically purges old backups. Standard is to hold the last 10 versions.
+
+Tested with Linux, MS-Windows and OpenVMS.
+
+; '''IMPORTANT:'''
+:   Creating this plugin was only possible because vim 7 offers new file management functions - namely :mkdir, finddir() delete() and the new List datatype. This plugin won'g work with vim 6.x.
+
+== Installation ==
+
+Install from https://github.com/krischik/vim-backup using dein (https://github.com/Shougo/dein.vim) or similar:
+
+    call dein#begin('$HOME/vimfiles/bundles')
+    call dein#add('krischik/vim-backup')
+    call dein#end()
+    call dein#install()
+
+set the following global variables:
+
+; '''g:backup_directory'''
+:   name of backup directory local to edited file used for non VMS only. Since non VMS operating-systems don't know about version we would get ugly directory listings. So all backups are moved into a hidden directory.
+
+; '''g:backup_purge'''
+:   count of backups to hold - purge older once. On VMS PURGE is used to delete older version 0 switched the feature off.
+
+== References ==
+
+{|
+|+ Numbered Backups
+|-
+| Vim-Script	|| https://www.vim.org/scripts/script.php?script_id=1537
+|-
+| Source	|| https://github.com/krischik/vim-backup
+|-
+| Wiki		|| https://github.com/krischik/vim-backup/wiki
+|-
+| Releases	|| https://github.com/krischik/vim-backup/releases
+|-
+| Issues	|| https://github.com/krischik/vim-backup/issues
+|-
+| Discussions	|| https://github.com/krischik/vim-backup/discussions
+|}
+
+==Comments==
+
+/* vim: set textwidth=0 wrap tabstop=8 shiftwidth=4 softtabstop=4 noexpandtab : */
+/* vim: set filetype=mediawiki fileencoding=utf8 fileformat=unix foldmethod=marker : */
+/* vim: set nospell spelllang=en_gb : */
